@@ -39,8 +39,20 @@ class ExamController extends Controller
     {
         $exam = Exam::findOrFail($id);
         $user = Auth::user();
+        $now = Carbon::now();
 
-        // Cek sesi ongoing (Lanjutkan jika ada)
+        // 1. CEK BATAS WAKTU
+        // Jika ada start_date dan sekarang masih sebelum start_date
+        if ($exam->start_date && $now->lt($exam->start_date)) {
+            return redirect()->back()->with('error', 'Ujian belum dibuka! Dimulai pada: ' . $exam->start_date->format('d M Y H:i'));
+        }
+
+        // Jika ada end_date dan sekarang sudah lewat end_date
+        if ($exam->end_date && $now->gt($exam->end_date)) {
+            return redirect()->back()->with('error', 'Ujian sudah berakhir pada: ' . $exam->end_date->format('d M Y H:i'));
+        }
+
+        // 2. CEK SESI ONGOING (Kode Lama)
         $existingSession = ExamSession::where('user_id', $user->id)
             ->where('exam_id', $exam->id)
             ->where('status', 'ongoing')
@@ -50,7 +62,7 @@ class ExamController extends Controller
             return redirect()->route('exams.show', ['session' => $existingSession->id, 'page' => 1]);
         }
 
-        // Buat sesi baru
+        // 3. BUAT SESI BARU (Kode Lama)
         $session = ExamSession::create([
             'user_id' => $user->id,
             'exam_id' => $exam->id,

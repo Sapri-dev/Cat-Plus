@@ -6,9 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 class Exam extends Model
 {
     use HasFactory;
-    protected $guarded = [];
 
-    public function questions() {
+    protected $fillable = [
+        'title', 
+        'description', 
+        'duration_minutes',
+        'start_date', // Tambahkan ini
+        'end_date'    // Tambahkan ini
+    ];
+
+    // Agar otomatis jadi objek Carbon (Mudah diformat tanggalnya)
+    protected $casts = [
+        'start_date' => 'datetime',
+        'end_date'   => 'datetime',
+    ];
+
+    public function questions()
+    {
         return $this->hasMany(Question::class);
     }
 }

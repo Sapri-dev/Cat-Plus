@@ -56,6 +56,10 @@ Route::middleware(['auth', 'verified', 'role:super_admin,admin'])->prefix('admin
     Route::delete('/sessions/{id}/reset', [AdminExamController::class, 'resetSession'])->name('admin.sessions.reset');
     Route::post('/exams/{id}/import', [AdminExamController::class, 'importQuestions'])->name('admin.exams.import');
     Route::post('/exams/{id}/generate', [AdminExamController::class, 'generateQuestions'])->name('admin.exams.generate');
+    // TAMBAHKAN INI: Route Edit & Update Ujian
+    Route::get('/exams/{id}/edit', [AdminExamController::class, 'edit'])->name('admin.exams.edit');
+    Route::put('/exams/{id}', [AdminExamController::class, 'update'])->name('admin.exams.update');
+
 });
 
 // ----------------------------------------------------------------------

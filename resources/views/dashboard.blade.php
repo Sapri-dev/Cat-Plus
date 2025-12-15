@@ -86,42 +86,62 @@
     @endif
 
     <!-- 3. KATALOG UJIAN -->
-    <div class="mb-6 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-            <h2 class="text-xl font-bold text-slate-800">Modul Ujian Tersedia</h2>
-            <span class="bg-slate-100 text-slate-600 text-xs font-bold px-2 py-1 rounded-full border border-slate-200">{{ $exams->count() }} Paket</span>
-        </div>
-        
-        <!-- Search bar -->
-        <div class="hidden md:flex items-center bg-white border border-slate-200 rounded-full px-4 py-2 shadow-sm focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500 transition">
-            <i class="fa-solid fa-magnifying-glass text-slate-400 text-sm mr-2"></i>
-            <input type="text" placeholder="Cari modul..." class="text-sm border-none focus:ring-0 text-slate-600 placeholder-slate-400 w-48 bg-transparent">
-        </div>
-    </div>
-
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @forelse($exams as $exam)
+        
+        @php
+            $now = \Carbon\Carbon::now();
+            $isUpcoming = $exam->start_date && $now->lt($exam->start_date); // Belum mulai
+            $isExpired  = $exam->end_date && $now->gt($exam->end_date);    // Sudah lewat
+            $isOpen     = !$isUpcoming && !$isExpired;                     // Sedang buka
+        @endphp
+
         <div class="group bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl hover:border-blue-200 hover:-translate-y-1 transition duration-300 flex flex-col h-full relative">
             
-            <!-- Badge Gratis -->
+            <!-- Badge Status Ketersediaan -->
             <div class="absolute top-4 right-4 z-10">
-                <span class="bg-blue-50/90 backdrop-blur-sm text-blue-700 text-[10px] font-bold px-2.5 py-1 rounded-full border border-blue-100 uppercase tracking-wide">
-                    Tersedia
-                </span>
+                @if($isUpcoming)
+                    <span class="bg-yellow-100 text-yellow-700 text-[10px] font-bold px-2.5 py-1 rounded-full border border-yellow-200 uppercase tracking-wide flex items-center gap-1">
+                        <i class="fa-solid fa-lock"></i> Belum Mulai
+                    </span>
+                @elseif($isExpired)
+                    <span class="bg-red-100 text-red-700 text-[10px] font-bold px-2.5 py-1 rounded-full border border-red-200 uppercase tracking-wide flex items-center gap-1">
+                        <i class="fa-solid fa-circle-xmark"></i> Ditutup
+                    </span>
+                @else
+                    <span class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2.5 py-1 rounded-full border border-emerald-200 uppercase tracking-wide flex items-center gap-1">
+                        <i class="fa-solid fa-door-open"></i> Tersedia
+                    </span>
+                @endif
             </div>
 
             <div class="p-6 flex-1 relative">
-                <!-- Icon Background Effect -->
-                <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-slate-50 rounded-full blur-xl group-hover:bg-blue-50 transition"></div>
-
                 <div class="relative z-10">
-                    <!-- Icon: Blue/Indigo Gradient -->
-                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 text-blue-600 w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shadow-sm mb-5 group-hover:scale-110 transition duration-300 border border-blue-100">
+                    <!-- Icon -->
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 text-blue-600 w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shadow-sm mb-5 border border-blue-100 {{ $isOpen ? 'group-hover:scale-110' : 'grayscale opacity-70' }} transition duration-300">
                         <i class="fa-solid fa-file-lines"></i>
                     </div>
                     
                     <h3 class="font-bold text-lg text-slate-900 mb-2 leading-tight group-hover:text-blue-700 transition">{{ $exam->title }}</h3>
-                    <p class="text-slate-500 text-sm mb-6 line-clamp-2 leading-relaxed">{{ $exam->description ?? 'Modul ujian standar untuk evaluasi kompetensi.' }}</p>
+                    <p class="text-slate-500 text-sm mb-4 line-clamp-2">{{ $exam->description ?? 'Modul ujian standar.' }}</p>
+
+                    <!-- Info Waktu -->
+                    <div class="space-y-1 text-xs text-slate-500 bg-slate-50 p-2 rounded-lg border border-slate-100 mb-4">
+                        @if($exam->start_date)
+                            <div class="flex justify-between">
+                                <span>Mulai:</span> <span class="font-bold text-slate-700">{{ $exam->start_date->format('d M H:i') }}</span>
+                            </div>
+                        @endif
+                        @if($exam->end_date)
+                            <div class="flex justify-between">
+                                <span>Selesai:</span> <span class="font-bold text-red-600">{{ $exam->end_date->format('d M H:i') }}</span>
+                            </div>
+                        @else
+                            <div class="flex justify-between">
+                                <span>Batas:</span> <span class="font-bold text-emerald-600">Tidak Ada</span>
+                            </div>
+                        @endif
+                    </div>
                     
                     <div class="flex items-center gap-4 text-xs font-medium text-slate-500 border-t border-slate-100 pt-4">
                         <span class="flex items-center gap-1.5"><i class="fa-regular fa-clock text-blue-400"></i> {{ $exam->duration_minutes }} Menit</span>
@@ -132,14 +152,25 @@
 
             <!-- Footer Action -->
             <div class="bg-slate-50 px-6 py-4 border-t border-slate-100">
-                <form action="{{ route('exams.start', $exam->id) }}" method="POST">
-                    @csrf
-                    <!-- Button: Slate Dark Theme -->
-                    <button type="submit" class="w-full bg-slate-900 text-white font-bold py-3 rounded-xl hover:bg-blue-600 transition shadow-lg group-hover:shadow-blue-200 flex items-center justify-center gap-2">
-                        <span>Mulai Kerjakan</span>
-                        <i class="fa-solid fa-chevron-right text-xs opacity-50 group-hover:translate-x-1 transition"></i>
+                @if($isOpen)
+                    <form action="{{ route('exams.start', $exam->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="w-full bg-slate-900 text-white font-bold py-3 rounded-xl hover:bg-blue-600 transition shadow-lg group-hover:shadow-blue-200 flex items-center justify-center gap-2">
+                            <span>Mulai Kerjakan</span>
+                            <i class="fa-solid fa-chevron-right text-xs opacity-50 group-hover:translate-x-1 transition"></i>
+                        </button>
+                    </form>
+                @elseif($isUpcoming)
+                    <button disabled class="w-full bg-slate-200 text-slate-400 font-bold py-3 rounded-xl cursor-not-allowed flex items-center justify-center gap-2">
+                        <span>Segera Hadir</span>
+                        <i class="fa-solid fa-hourglass-start"></i>
                     </button>
-                </form>
+                @else
+                    <button disabled class="w-full bg-red-50 text-red-300 font-bold py-3 rounded-xl cursor-not-allowed flex items-center justify-center gap-2 border border-red-100">
+                        <span>Waktu Habis</span>
+                        <i class="fa-solid fa-ban"></i>
+                    </button>
+                @endif
             </div>
         </div>
         @empty

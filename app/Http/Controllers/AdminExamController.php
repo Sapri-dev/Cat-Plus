@@ -27,22 +27,27 @@ class AdminExamController extends Controller
     }
 
     // 3. Simpan Ujian Baru
+    // Update method store
     public function store(Request $request)
     {
         $request->validate([
             'title' => 'required',
-            'duration_minutes' => 'required|integer|min:10',
+            'duration_minutes' => 'required|integer|min:1',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date', // Validasi: Tgl selesai harus setelah mulai
         ]);
 
         $exam = Exam::create([
             'title' => $request->title,
             'description' => $request->description,
-            'duration_minutes' => $request->duration_minutes
+            'duration_minutes' => $request->duration_minutes,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
         ]);
 
-        return redirect()->route('admin.exams.show', $exam->id);
+        return redirect()->route('admin.exams.show', $exam->id)->with('success', 'Ujian berhasil dibuat!');
     }
-
+    
     // 4. Detail Ujian (Tempat Menambah Soal)
     public function show($id)
     {
@@ -312,5 +317,34 @@ class AdminExamController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error Sistem: ' . $e->getMessage());
         }
+    }
+    // Method Menampilkan Form Edit
+    public function edit($id)
+    {
+        $exam = Exam::findOrFail($id);
+        return view('admin.exams.edit', compact('exam'));
+    }
+
+    // Method Proses Update
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required',
+            'duration_minutes' => 'required|integer|min:1',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
+        ]);
+
+        $exam = Exam::findOrFail($id);
+
+        $exam->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'duration_minutes' => $request->duration_minutes,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+        ]);
+
+        return redirect()->route('admin.exams.index')->with('success', 'Paket ujian berhasil diperbarui!');
     }
 }

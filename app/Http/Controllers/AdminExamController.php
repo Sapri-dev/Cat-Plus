@@ -205,21 +205,25 @@ class AdminExamController extends Controller
     // ... method lainnya ...
 
     // 11. Proses Import Excel
-    public function importQuestions(Request $request, $id)
-    {
-        $request->validate([
-            'file' => 'required|mimes:xlsx,xls,csv'
-        ]);
+public function importQuestions(Request $request, $id)
+{
+    $request->validate([
+        'file' => 'required|mimes:xlsx,xls,csv|max:5120' // Batasi maks 5MB untuk Vercel
+    ]);
 
-        try {
-            // Jalankan Import
-            Excel::import(new QuestionsImport($id), $request->file('file'));
-            
-            return redirect()->back()->with('success', 'Soal berhasil diimport!');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Gagal import: ' . $e->getMessage());
-        }
+    try {
+        // PERBAIKAN: Gunakan getRealPath() agar membaca dari path sementara Vercel
+        $file = $request->file('file');
+        
+        Excel::import(new QuestionsImport($id), $file->getRealPath());
+        
+        return redirect()->back()->with('success', 'Soal berhasil diimport!');
+    } catch (\Exception $e) {
+        // Tampilkan pesan error yang lebih detail untuk debugging
+        return redirect()->back()->with('error', 'Gagal import: ' . $e->getMessage());
     }
+}
+
     
     // 12. Download Template Excel (Opsional, agar user tahu formatnya)
     public function downloadTemplate()

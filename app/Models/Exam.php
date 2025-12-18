@@ -11,8 +11,8 @@ class Exam extends Model
         'title', 
         'description', 
         'duration_minutes',
-        'start_date', // Tambahkan ini
-        'end_date'    // Tambahkan ini
+        'start_date', 
+        'end_date'    
     ];
 
     // Agar otomatis jadi objek Carbon (Mudah diformat tanggalnya)

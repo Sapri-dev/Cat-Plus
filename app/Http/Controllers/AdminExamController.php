@@ -204,25 +204,32 @@ class AdminExamController extends Controller
 
     // ... method lainnya ...
 
-    // 11. Proses Import Excel
-public function importQuestions(Request $request, $id)
-{
-    $request->validate([
-        'file' => 'required|mimes:xlsx,xls,csv|max:5120' // Batasi maks 5MB untuk Vercel
-    ]);
+   // 11. Proses Import Excel (SUDAH DIPERBAIKI)
+    public function importQuestions(Request $request, $id)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv|max:5120' // Batasi maks 5MB
+        ]);
 
-    try {
-        // PERBAIKAN: Gunakan getRealPath() agar membaca dari path sementara Vercel
-        $file = $request->file('file');
-        
-        Excel::import(new QuestionsImport($id), $file->getRealPath());
-        
-        return redirect()->back()->with('success', 'Soal berhasil diimport!');
-    } catch (\Exception $e) {
-        // Tampilkan pesan error yang lebih detail untuk debugging
-        return redirect()->back()->with('error', 'Gagal import: ' . $e->getMessage());
+        try {
+            $file = $request->file('file');
+            
+            // Kita tambahkan parameter ke-4: \Maatwebsite\Excel\Excel::XLSX
+            // Ini memberitahu sistem: "Baca file ini sebagai XLSX, jangan tebak-tebak sendiri"
+            
+            Excel::import(
+                new QuestionsImport($id), 
+                $file, 
+                null, 
+                \Maatwebsite\Excel\Excel::XLSX
+            );
+            
+            return redirect()->back()->with('success', 'Soal berhasil diimport!');
+        } catch (\Exception $e) {
+            // Tampilkan pesan error detail
+            return redirect()->back()->with('error', 'Gagal import: ' . $e->getMessage());
+        }
     }
-}
 
     
     // 12. Download Template Excel (Opsional, agar user tahu formatnya)

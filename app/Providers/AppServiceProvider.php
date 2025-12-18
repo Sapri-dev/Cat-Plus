@@ -23,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
         // Tambahkan logika ini:
         if($this->app->environment('production')) {
             URL::forceScheme('https');
+
+             // TAMBAHAN: Fix Error Excel Read-only
+        // Paksa library Excel menggunakan folder /tmp di server Vercel
+        config(['excel.temporary_files.local_path' => '/tmp']);
         }
     }
 }

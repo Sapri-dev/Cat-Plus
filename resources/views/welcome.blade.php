@@ -29,20 +29,6 @@
                 Solusi lengkap untuk Sekolah, Universitas, dan Perusahaan. Kelola ribuan peserta dan bank soal dengan mudah. Dilengkapi <strong>AI Generator</strong> untuk membantu Admin membuat soal dalam hitungan detik.
             </p>
 
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                @auth
-                    <a href="{{ url('/dashboard') }}" class="px-8 py-4 rounded-full bg-slate-900 text-white font-bold text-lg shadow-lg hover:bg-black transition transform hover:-translate-y-1 flex items-center justify-center gap-2">
-                        Masuk Dashboard <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-                @else
-                    <a href="{{ route('register') }}" class="px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-lg shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transition transform hover:-translate-y-1">
-                        Daftar Sekarang
-                    </a>
-                    <a href="{{ route('login') }}" class="px-8 py-4 rounded-full bg-white text-gray-700 border border-gray-200 font-bold text-lg hover:bg-gray-50 hover:border-gray-300 transition flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-right-to-bracket"></i> Login Peserta
-                    </a>
-                @endauth
-            </div>
         </div>
     </div>
 
@@ -171,11 +157,6 @@
                 <span class="block">Tingkatkan Efisiensi Evaluasi Anda</span>
                 <span class="block text-indigo-300 mt-2 text-2xl">Bergabung dengan platform CAT modern sekarang.</span>
             </h2>
-            <div class="mt-8 flex justify-center gap-4">
-                <a href="{{ route('register') }}" class="px-8 py-3 border border-transparent text-base font-bold rounded-full text-indigo-900 bg-white hover:bg-gray-100 md:py-4 md:text-lg md:px-10 shadow-lg transition">
-                    Mulai Gratis
-                </a>
-            </div>
         </div>
     </div>
 

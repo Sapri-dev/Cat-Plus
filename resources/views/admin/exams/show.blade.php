@@ -3,7 +3,7 @@
 @section('content')
 <div class="min-h-screen bg-gray-50 py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         <!-- HEADER -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
             <div>
@@ -23,7 +23,7 @@
                     </span>
                 </div>
             </div>
-            
+
             <div class="flex gap-2">
                 <!-- Tambahkan tombol aksi global jika perlu, misal: Preview Ujian -->
                 <button onclick="window.location.reload()" class="bg-white text-gray-700 hover:bg-gray-50 border border-gray-300 px-4 py-2 rounded-lg text-sm font-medium shadow-sm transition">
@@ -44,7 +44,7 @@
             </div>
         </div>
         @endif
-        
+
         @if(session('error'))
         <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl flex items-start gap-3 shadow-sm animate-fade-in-down">
             <div class="bg-red-100 p-2 rounded-full text-red-600 shrink-0">
@@ -58,24 +58,24 @@
         @endif
 
         <div class="grid grid-cols-1 xl:grid-cols-3 gap-8 items-start">
-            
+
             <!-- KOLOM KIRI: INPUT SOAL -->
             <div class="xl:col-span-1 space-y-6">
 
                 <!-- 1. AI GENERATOR CARD (Modern Gradient) -->
-                <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-700 shadow-xl text-white">
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
                     <!-- Background Patterns -->
                     <div class="absolute top-0 right-0 -mr-16 -mt-16 w-48 h-48 bg-white opacity-10 rounded-full blur-3xl"></div>
-                    <div class="absolute bottom-0 left-0 -ml-16 -mb-16 w-32 h-32 bg-yellow-400 opacity-20 rounded-full blur-2xl"></div>
+                    <div class="absolute bottom-0 left-0 -ml-16 -mb-16 w-32 h-32 bg-[#562cbf opacity-20 rounded-full blur-2xl"></div>
 
                     <div class="relative p-6 z-10">
                         <div class="flex items-center gap-3 mb-6">
                             <div class="bg-white/20 p-2.5 rounded-xl backdrop-blur-md shadow-inner border border-white/10">
-                                <i class="fa-solid fa-wand-magic-sparkles text-yellow-300 text-xl"></i>
+                                <i class="fa-solid fa-wand-magic-sparkles text-[#562cbf] text-xl"></i>
                             </div>
                             <div>
                                 <h3 class="font-bold text-lg leading-tight">AI Generator</h3>
-                                <p class="text-indigo-200 text-xs">Buat soal otomatis dalam hitungan detik</p>
+                                <p class="text-[#737373] text-xs">Buat soal otomatis dalam hitungan detik</p>
                             </div>
                         </div>
 
@@ -83,32 +83,32 @@
                             @csrf
                             <div class="space-y-4">
                                 <div>
-                                    <label class="text-xs font-bold text-indigo-200 uppercase tracking-wider ml-1">Topik / Materi</label>
-                                    <input type="text" name="topic" 
-                                           class="mt-1 w-full rounded-xl border-0 bg-white/10 text-white placeholder-indigo-300 focus:ring-2 focus:ring-yellow-400 focus:bg-white/20 text-sm py-3 px-4 transition" 
-                                           placeholder="Misal: UUD 1945, Deret Angka..." required>
+                                    <label class="text-xs font-bold text-[#1c1c1c] uppercase tracking-wider ml-1">Topik / Materi</label>
+                                    <input type="text" name="topic"
+                                        class="mt-1 w-full rounded-xl border-0 bg-gray-50 text-[#545353] placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:bg-gray-50 text-sm py-3 px-4 transition"
+                                        placeholder="Misal: UUD 1945, Deret Angka..." required>
                                 </div>
 
                                 <div class="grid grid-cols-2 gap-4">
                                     <div>
-                                        <label class="text-xs font-bold text-indigo-200 uppercase tracking-wider ml-1">Jumlah Soal</label>
-                                        <input type="number" name="amount" min="1" max="20" value="5" 
-                                               class="mt-1 w-full rounded-xl border-0 bg-white/10 text-white focus:ring-2 focus:ring-yellow-400 focus:bg-white/20 text-sm py-3 px-4 transition text-center" required>
+                                        <label class="text-xs font-bold text-[#6e6d6d] uppercase tracking-wider ml-1">Jumlah Soal</label>
+                                        <input type="number" name="amount" min="1" max="20" value="5"
+                                            class="mt-1 w-full rounded-xl border-0 bg-gray-50 text-[#545353] placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:bg-gray-50 text-sm py-3 px-4 transition text-center" required>
                                     </div>
                                     <div>
-                                        <label class="text-xs font-bold text-indigo-200 uppercase tracking-wider ml-1">Poin Benar</label>
-                                        <input type="number" name="score" min="1" value="5" 
-                                               class="mt-1 w-full rounded-xl border-0 bg-white/10 text-white focus:ring-2 focus:ring-yellow-400 focus:bg-white/20 text-sm py-3 px-4 transition text-center" required>
+                                        <label class="text-xs font-bold text-[#6e6d6d] uppercase tracking-wider ml-1">Poin Benar</label>
+                                        <input type="number" name="score" min="1" value="5"
+                                            class="mt-1 w-full rounded-xl border-0 bg-gray-50 text-[#545353] placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:bg-gray-50 text-sm py-3 px-4 transition text-center" required>
                                     </div>
                                 </div>
 
                                 <div>
-                                    <label class="text-xs font-bold text-indigo-200 uppercase tracking-wider ml-1 mb-2 block">Tingkat Kesulitan</label>
+                                    <label class="text-xs font-bold text-[#1c1c1c] uppercase tracking-wider ml-1 mb-2 block">Tingkat Kesulitan</label>
                                     <div class="grid grid-cols-4 gap-2">
                                         @foreach(['Mudah', 'Sedang', 'Sulit', 'HOTS'] as $diff)
                                         <label class="cursor-pointer">
                                             <input type="radio" name="difficulty" value="{{ $diff }}" class="peer sr-only" {{ $diff == 'Sedang' ? 'checked' : '' }}>
-                                            <div class="text-center text-xs py-2 rounded-lg bg-white/10 border border-transparent text-indigo-100 hover:bg-white/20 peer-checked:bg-yellow-400 peer-checked:text-purple-900 peer-checked:font-bold transition select-none">
+                                            <div class="text-center text-xs py-2 rounded-lg bg-gray-50 border border-transparent text-[#919090] hover:bg-white/20 peer-checked:bg-[#562cbf] peer-checked:text-white peer-checked:font-bold transition select-none">
                                                 {{ $diff }}
                                             </div>
                                         </label>
@@ -116,9 +116,9 @@
                                     </div>
                                 </div>
 
-                                <button type="submit" class="w-full bg-white text-indigo-700 font-bold py-3 rounded-xl hover:bg-indigo-50 transition shadow-lg flex items-center justify-center gap-2 group mt-2">
+                                <button type="submit" class="w-full bg-[#562cbf] text-white font-bold py-3 rounded-xl hover:bg-[#4a25a0] transition shadow-lg flex items-center justify-center gap-2 group mt-2">
                                     <span>Generate Sekarang</span>
-                                    <i class="fa-solid fa-bolt text-yellow-500 group-hover:animate-pulse"></i>
+                                    <i class="fa-solid fa-bolt text-white group-hover:animate-pulse"></i>
                                 </button>
                             </div>
                         </form>
@@ -141,7 +141,7 @@
     <form action="{{ route('admin.exams.questions.store', $exam->id) }}" method="POST">
         @csrf
         <div class="space-y-5">
-            
+
             <!-- BARIS 1: Kategori & Poin -->
             <div class="grid grid-cols-12 gap-4">
                 <!-- Input Kategori (Bisa Ketik Bebas) -->
@@ -150,10 +150,10 @@
                         Kategori Topik
                         <span class="text-gray-400 font-normal lowercase ml-1">(pilih/ketik baru)</span>
                     </label>
-                    <input type="text" list="category_list" name="type" 
-                           class="w-full rounded-lg border-gray-300 text-sm focus:ring-indigo-500 focus:border-indigo-500 bg-gray-50 placeholder-gray-400" 
-                           placeholder="Contoh: Sejarah, Logika..." required>
-                    
+                    <input type="text" list="category_list" name="type"
+                        class="w-full rounded-lg border-gray-300 text-sm focus:ring-indigo-500 focus:border-indigo-500 bg-gray-50 placeholder-gray-400"
+                        placeholder="Contoh: Sejarah, Logika..." required>
+
                     <!-- Opsi Saran (Tetap ada tapi tidak memaksa) -->
                     <datalist id="category_list">
                         <option value="TWK">
@@ -168,8 +168,8 @@
                 <div class="col-span-4">
                     <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Bobot Poin</label>
                     <div class="relative">
-                        <input type="number" name="default_score" value="5" 
-                               class="w-full rounded-lg border-gray-300 text-sm focus:ring-indigo-500 focus:border-indigo-500 bg-gray-50 pl-3 pr-8" 
+                        <input type="number" name="default_score" value="5"
+                               class="w-full rounded-lg border-gray-300 text-sm focus:ring-indigo-500 focus:border-indigo-500 bg-gray-50 pl-3 pr-8"
                                placeholder="5" required>
                         <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                             <span class="text-gray-400 text-xs">pts</span>
@@ -181,8 +181,8 @@
             <!-- BARIS 2: Pertanyaan -->
             <div>
                 <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Pertanyaan</label>
-                <textarea name="question_text" rows="3" 
-                          class="w-full rounded-lg border-gray-300 text-sm focus:ring-indigo-500 focus:border-indigo-500" 
+                <textarea name="question_text" rows="3"
+                          class="w-full rounded-lg border-gray-300 text-sm focus:ring-indigo-500 focus:border-indigo-500"
                           placeholder="Tulis soal disini..." required></textarea>
             </div>
 
@@ -192,7 +192,7 @@
                     <label class="block text-xs font-bold text-gray-700 uppercase">Pilihan Jawaban</label>
                     <span class="text-[10px] text-gray-400">*Klik lingkaran kanan untuk kunci jawaban</span>
                 </div>
-                
+
                 <div class="space-y-3">
                     @foreach(['A', 'B', 'C', 'D', 'E'] as $index => $label)
                     <div class="flex items-center group relative">
@@ -200,20 +200,20 @@
                         <div class="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-l-lg border border-r-0 border-gray-300 text-gray-600 font-bold text-sm">
                             {{ $label }}
                         </div>
-                        
+
                         <!-- Input Teks Jawaban -->
-                        <input type="text" name="options[]" 
-                               class="flex-1 block w-full h-10 rounded-none border-gray-300 text-sm focus:ring-indigo-500 focus:border-indigo-500 px-3" 
+                        <input type="text" name="options[]"
+                               class="flex-1 block w-full h-10 rounded-none border-gray-300 text-sm focus:ring-indigo-500 focus:border-indigo-500 px-3"
                                placeholder="Isi jawaban opsi {{ $label }}..." required>
-                        
+
                         <!-- Input Skor Manual (Opsional, disembunyikan jika ingin otomatis ikut Bobot Poin di atas) -->
-                        <input type="number" name="scores[]" 
-                               class="w-16 h-10 border-gray-300 border-l-0 border-r-0 text-sm text-center focus:ring-indigo-500 text-gray-500 placeholder-gray-300" 
+                        <input type="number" name="scores[]"
+                               class="w-16 h-10 border-gray-300 border-l-0 border-r-0 text-sm text-center focus:ring-indigo-500 text-gray-500 placeholder-gray-300"
                                placeholder="0">
 
                         <!-- Radio Kunci Jawaban -->
                         <div class="w-10 h-10 bg-gray-50 border border-l-0 border-gray-300 rounded-r-lg flex items-center justify-center hover:bg-indigo-50 cursor-pointer transition">
-                            <input type="radio" name="correct_index" value="{{ $index }}" 
+                            <input type="radio" name="correct_index" value="{{ $index }}"
                                    class="h-5 w-5 text-indigo-600 focus:ring-indigo-500 cursor-pointer border-gray-400" required>
                         </div>
                     </div>
@@ -240,7 +240,7 @@
                                 <p class="text-sm font-bold text-gray-700">Klik untuk upload .xlsx</p>
                                 <p class="text-xs text-gray-400 mt-1">Pastikan format header sesuai template</p>
                             </div>
-                            
+
                             <div class="mt-4">
                                 <p class="text-xs font-bold text-gray-500 mb-1">Format Header:</p>
                                 <code class="block bg-gray-800 text-green-400 text-[10px] p-2 rounded overflow-x-auto whitespace-nowrap">
@@ -259,7 +259,7 @@
 
             <!-- KOLOM KANAN: LIST SOAL & MONITORING -->
             <div class="xl:col-span-2 space-y-8">
-                
+
                 <!-- MONITORING PESERTA -->
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
                     <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
@@ -337,7 +337,7 @@
                             <!-- Konten Soal -->
                             <div class="flex-1">
                                 <p class="text-gray-800 text-base leading-relaxed mb-4 font-medium">{{ $q->question_text }}</p>
-                                
+
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                     @foreach($q->options as $opt)
                                     <div class="relative flex items-center p-2 rounded-lg border {{ $opt->is_correct ? 'bg-green-50 border-green-200' : 'bg-white border-gray-100' }}">
@@ -346,12 +346,12 @@
                                                 <i class="fa-solid fa-check"></i>
                                             </div>
                                         @endif
-                                        
+
                                         <span class="w-6 h-6 flex items-center justify-center rounded text-xs font-bold mr-2 {{ $opt->is_correct ? 'bg-green-200 text-green-800' : 'bg-gray-100 text-gray-500' }}">
                                             {{ substr($opt->option_text, 0, 1) }} <!-- Asumsi opsi diawali huruf, atau hardcode A/B/C -->
                                         </span>
                                         <span class="text-sm text-gray-700 flex-1 {{ $opt->is_correct ? 'font-semibold' : '' }}">{{ $opt->option_text }}</span>
-                                        
+
                                         @if($opt->score > 0)
                                         <span class="ml-2 text-[10px] font-bold px-1.5 py-0.5 rounded bg-gray-100 text-gray-600 border border-gray-200">
                                             +{{ $opt->score }}

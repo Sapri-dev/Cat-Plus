@@ -15,7 +15,7 @@
     <nav class="bg-white sticky top-0 z-50 shadow-sm border-b border-slate-200 backdrop-blur-md bg-opacity-95">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                
+
                 <!-- KIRI: LOGO & MENU UMUM -->
                 <div class="flex items-center gap-8">
                     <!-- LOGO: Ganti Gradient Ungu ke Blue/Indigo -->
@@ -31,7 +31,7 @@
                             <a href="{{ url('/dashboard') }}" class="px-4 py-2 rounded-full text-sm font-medium transition-colors {{ request()->is('dashboard') ? 'bg-slate-100 font-bold text-slate-900' : 'text-slate-500 hover:text-blue-600 hover:bg-slate-50' }}">
                                 Dashboard
                             </a>
-                            
+
                             <!-- Link Riwayat: Hover Blue -->
                             <a href="{{ route('exams.history') }}" class="px-4 py-2 rounded-full text-sm font-medium transition-colors {{ request()->routeIs('exams.history') ? 'bg-slate-100 font-bold text-slate-900' : 'text-slate-500 hover:text-blue-600 hover:bg-slate-50' }}">
                                 Riwayat
@@ -45,8 +45,8 @@
                     @auth
                         <!-- TOMBOL PANEL (Super Admin Merah, Admin Slate/Hitam) -->
                         @if(Auth::user()->hasRole(['super_admin', 'admin']))
-                            <a href="{{ Auth::user()->role === 'super_admin' ? route('super.users.index') : route('admin.exams.index') }}" 
-                               class="hidden md:flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-white shadow-lg transform hover:-translate-y-0.5 transition 
+                            <a href="{{ Auth::user()->role === 'super_admin' ? route('super.users.index') : route('admin.exams.index') }}"
+                               class="hidden md:flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-white shadow-lg transform hover:-translate-y-0.5 transition
                                {{ Auth::user()->role === 'super_admin' ? 'bg-red-600 hover:bg-red-700' : 'bg-slate-900 hover:bg-black' }}">
                                 <i class="fa-solid {{ Auth::user()->role === 'super_admin' ? 'fa-shield-cat' : 'fa-lock' }}"></i>
                                 {{ Auth::user()->role === 'super_admin' ? 'Panel Super' : 'Panel Admin' }}
@@ -67,7 +67,7 @@
                                     <span class="font-bold">{{ substr(Auth::user()->name, 0, 1) }}</span>
                                 </div>
                             </button>
-                            
+
                             <!-- Dropdown Menu -->
                             <div class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 p-1">
                                 <form method="POST" action="{{ route('logout') }}">

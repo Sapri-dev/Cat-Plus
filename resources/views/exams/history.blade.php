@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-    
+
     <div class="flex items-center justify-between mb-6">
         <div>
             <h1 class="text-2xl font-bold text-gray-800">Riwayat Ujian Saya</h1>
@@ -50,8 +50,8 @@
                             </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900">{{ $history->created_at->format('d M Y') }}</div>
-                            <div class="text-xs text-gray-500">{{ $history->created_at->format('H:i') }} WIB</div>
+                                <div class="text-sm text-gray-900">{{ $history->created_at->format('d M Y') }}</div>
+                                <div class="text-xs text-gray-500">{{ $history->created_at->format('H:i') }} WITA</div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <span class="px-3 py-1 inline-flex text-lg leading-5 font-bold rounded-full bg-blue-50 text-blue-700">

@@ -13,7 +13,7 @@
         </div>
 
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            
+
             <!-- Badge Technology -->
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 text-white text-xs font-bold mb-8 shadow-xl border border-slate-700 hover:scale-105 transition duration-300 cursor-default">
                 <i class="fa-solid fa-microchip text-blue-400 text-sm"></i>
@@ -24,7 +24,7 @@
                 Platform Ujian Online <br class="hidden md:block" />
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Cepat, Aman & Cerdas.</span>
             </h1>
-            
+
             <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-500 mb-10 leading-relaxed">
                 Solusi lengkap untuk Sekolah, Universitas, dan Perusahaan. Kelola ribuan peserta dan bank soal dengan mudah. Dilengkapi <strong>AI Generator</strong> untuk membantu Admin membuat soal dalam hitungan detik.
             </p>
@@ -42,17 +42,6 @@
                         <i class="fa-solid fa-right-to-bracket"></i> Login Peserta
                     </a>
                 @endauth
-            </div>
-
-            <!-- Dashboard Preview / Mockup -->
-            <div class="mt-16 relative mx-auto max-w-5xl group">
-                <div class="absolute -inset-1 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
-                <div class="relative rounded-2xl border border-gray-200 bg-white shadow-2xl overflow-hidden">
-                    <!-- Placeholder Gambar Dashboard -->
-                    <div class="aspect-w-16 aspect-h-9 bg-gray-100 flex items-center justify-center text-gray-400">
-                        <img src="https://placehold.co/1200x600/f8fafc/3b82f6?text=Dashboard+Admin+Preview" alt="App Screenshot" class="w-full object-cover">
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -159,7 +148,7 @@
                 <div class="relative">
                     <div class="absolute inset-0 bg-gradient-to-r from-blue-200 to-indigo-200 rounded-3xl transform -rotate-3 scale-105 opacity-50"></div>
                     <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Online Exam" class="relative rounded-3xl shadow-2xl w-full object-cover h-[500px]">
-                    
+
                     <!-- Floating Badge -->
                     <div class="absolute -bottom-6 -right-6 bg-white p-4 rounded-xl shadow-xl border border-gray-100 flex items-center gap-4 animate-bounce duration-[3000ms]">
                         <div class="bg-indigo-100 p-3 rounded-full text-indigo-600">

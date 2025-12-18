@@ -10,7 +10,7 @@
         <a href="{{ route('super.users.index') }}" class="px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 rounded-t-lg transition">
             <i class="fa-solid fa-users-gear mr-2"></i> Manajemen User
         </a>
-        
+
         <!-- Tab Ujian (AKTIF - Warna Biru) -->
         <a href="{{ route('admin.exams.index') }}" class="px-4 py-2 text-sm font-bold text-blue-600 border-b-2 border-blue-600 bg-blue-50/50 rounded-t-lg transition">
             <i class="fa-solid fa-file-pen mr-2"></i> Manajemen Ujian
@@ -23,7 +23,7 @@
     <div class="bg-gradient-to-r from-slate-900 to-blue-900 rounded-2xl p-8 mb-8 text-white shadow-xl relative overflow-hidden">
         <!-- Dekorasi Background -->
         <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl -mr-16 -mt-16"></div>
-        
+
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 relative z-10">
             <div>
                 <h1 class="text-3xl font-bold flex items-center gap-3">
@@ -31,7 +31,7 @@
                 </h1>
                 <p class="text-slate-300 mt-2">Buat, edit, dan kelola bank soal untuk peserta ujian.</p>
             </div>
-            
+
             <!-- Tombol Tambah Ujian (Putih Text Biru agar kontras) -->
             <a href="{{ route('admin.exams.create') }}" class="bg-white hover:bg-blue-50 text-blue-900 px-6 py-3 rounded-xl font-bold shadow-lg shadow-blue-900/20 flex items-center gap-2 transition transform hover:scale-105">
                 <i class="fa-solid fa-plus"></i> Buat Ujian Baru
@@ -70,7 +70,7 @@
                                 <div>
                                     <p class="font-bold text-slate-800 text-base">{{ $exam->title }}</p>
                                     <p class="text-xs text-slate-500 truncate max-w-xs">{{ Str::limit($exam->description, 50) }}</p>
-                                    
+
                                     <!-- Indikator Tanggal (Optional jika ingin ditampilkan di list) -->
                                     @if($exam->start_date || $exam->end_date)
                                         <div class="mt-1 text-[10px] text-slate-400 flex gap-2">
@@ -91,11 +91,11 @@
                                 <i class="fa-solid fa-list-ol"></i> {{ $exam->questions_count }} Soal
                             </span>
                         </td>
-                        
+
                         <!-- KOLOM AKSI (Lengkap dengan Edit) -->
                         <td class="px-6 py-4 text-right">
                             <div class="flex items-center justify-end gap-2">
-                                
+
                                 <!-- 1. Edit Detail (Judul, Waktu) -->
                                 <a href="{{ route('admin.exams.edit', $exam->id) }}" class="bg-white border border-slate-300 text-slate-500 hover:bg-slate-50 hover:text-blue-600 hover:border-blue-300 px-2.5 py-1.5 rounded-lg text-xs font-bold transition shadow-sm" title="Edit Informasi Ujian">
                                     <i class="fa-solid fa-pen-to-square"></i>

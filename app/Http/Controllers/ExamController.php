@@ -18,14 +18,14 @@ class ExamController extends Controller
 
         // Ambil Data Ujian (Wajib pakai withCount agar jumlah soal muncul)
         // Variabel harus bernama $exams agar sesuai dengan View
-        $exams = Exam::withCount('questions')->latest()->get(); 
-        
+        $exams = Exam::withCount('questions')->latest()->get();
+
         // Statistik: Total Ujian Selesai
         // Variabel harus bernama $totalExamFinished agar sesuai View
         $totalExamFinished = ExamSession::where('user_id', $userId)
             ->where('status', 'completed')
             ->count();
-            
+
         // Statistik: Rata-rata Skor
         $averageScore = ExamSession::where('user_id', $userId)
             ->where('status', 'completed')
@@ -94,7 +94,7 @@ class ExamController extends Controller
 
         // Ambil Soal (Paginate 1 per halaman)
         $questions = $session->exam->questions()->with('options')->paginate(1);
-        
+
         // Cek jika halaman melebihi jumlah soal (opsional, untuk safety)
         if ($questions->isEmpty()) {
              return redirect()->route('exams.result', $session->id);
@@ -116,9 +116,9 @@ class ExamController extends Controller
             ->pluck('question_id')->toArray();
 
         return view('exams.show', compact(
-            'session', 
-            'questions', 
-            'savedAnswer', 
+            'session',
+            'questions',
+            'savedAnswer',
             'timeLeft',
             'allQuestions',
             'answeredQuestionIds'
@@ -163,7 +163,7 @@ class ExamController extends Controller
             ->firstOrFail();
 
         // Redirect ke result untuk kalkulasi final
-        // Kita tidak update status 'completed' disini, tapi di method result() 
+        // Kita tidak update status 'completed' disini, tapi di method result()
         // agar kalkulasi skornya akurat saat halaman result dibuka.
         return redirect()->route('exams.result', $session->id);
     }
@@ -178,13 +178,13 @@ class ExamController extends Controller
 
         // 1. Ambil Semua Jawaban Peserta
         $answers = ExamAnswer::where('exam_session_id', $session->id)
-            ->with('option') 
+            ->with('option')
             ->get();
 
         // 2. Hitung Statistik
         $totalQuestions = $session->exam->questions()->count();
         $answeredCount = $answers->count();
-        
+
         $totalScore = 0;
         $correctAnswers = 0;
 
@@ -209,9 +209,9 @@ class ExamController extends Controller
         }
 
         return view('exams.result', compact(
-            'session', 
-            'totalQuestions', 
-            'answeredCount', 
+            'session',
+            'totalQuestions',
+            'answeredCount',
             'correctAnswers'
         ));
     }
